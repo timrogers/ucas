@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'logger'
+require_relative 'scraper'
 
 module UCAS
   class Application
@@ -9,6 +10,11 @@ module UCAS
     
     def self.log(message)
       @logger.info(message)
+    end
+    
+    def self.error(message)
+      raise message
+      @logger.fatal(message)
     end
     
   end
