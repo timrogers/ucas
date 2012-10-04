@@ -13,8 +13,7 @@ module UCAS
       @logger.info(message)
     end
     
-    def self.error(exception, message)
-      raise exception, message
+    def self.error(message)
       @logger.fatal(message)
     end
     
