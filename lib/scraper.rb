@@ -22,9 +22,18 @@ module UCAS
       
     end
     
+    def agent
+      @agent
+    end
+    
+    def settings
+      @settings
+    end
+    
     def scrape
       begin
         login
+        go_to_choices
       rescue UCAS::ScraperException => e
         UCAS::Application.error(e.message)
         raise
@@ -41,12 +50,16 @@ module UCAS
         @agent.page.forms[0]["appNo"] = @settings[:personal_id]
         @agent.page.forms[0]["username"] = @settings[:username]
         @agent.page.forms[0]["appPassword"] = @settings[:password]
-        @agent.page.forms[0].submit
+        @agent.page.forms[0].submit(@agent.page.forms[0].button_with(:value => "login"))
         
         # Check that we successfully logged in, and raise an exception if not
-        if @agent.page.search('.errormsg')
+        if @agent.page.search('.errormsg').any?
           raise UCAS::ScraperException, "The login details provided were incorrect"
         end
+      end
+      
+      def go_to_choices
+        @agent.page.link_with(text: "choices ").click
       end
   end
 end
