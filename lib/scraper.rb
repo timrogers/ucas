@@ -9,7 +9,7 @@ module UCAS
     def initialize(personal_id, username, password)
       
       if personal_id.empty? or username.empty? or password.empty?
-        UCAS::Application.error("You must provide a personal ID, username and password")
+        UCAS::Application.error(UCAS::ScraperException, "You must provide a personal ID, username and password")
         return
       end
       
@@ -41,7 +41,7 @@ module UCAS
         
         # Check that we successfully logged in, and raise an exception if not
         if @agent.page.search('.errormsg')
-          UCAS::Application.error("The login details provided were incorrect")
+          UCAS::Application.error(UCAS::ScraperException, "The login details provided were incorrect")
         end
       end
   end
