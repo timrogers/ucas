@@ -17,6 +17,7 @@ GEM
     net-http-persistent (2.7)
     nokogiri (1.5.5)
     ntlm-http (0.1.1)
+    redis (2.2.2)
     sendgrid (1.0.1)
       json
       json
@@ -31,4 +32,5 @@ PLATFORMS
 DEPENDENCIES
   mechanize
   nokogiri
+  redis
   sendgrid
