@@ -77,6 +77,13 @@ module UCAS
             reply: choice_rows.shift.text.strip!,
             updated: choice_rows.shift.text.strip!
           }
+          
+          if result[:decision] == nil || result[:decision] == ""
+            result[:decision_text] = "<no decision>"
+          else
+            result[:decision_text] = result[:decision]
+          end
+          
           results << result
         end
         results

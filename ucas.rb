@@ -10,19 +10,20 @@ results.each do |result|
     previous_decision = UCAS::Datastore.get(result[:code])
   rescue Exception => e
     UCAS::Application.error("There was an error in reading from Redis: #{e.message}")
+    raise
   end
   
   if previous_decision != result[:decision]
     # The decision for that university has changed - hooray!
-    puts "There has been a change of status for the course #{result[:code]}."
-    UCAS::Application.log("Change of status for the course #{result[:code]}: #{result[:decision]}")
+        
+    UCAS::Application.log("Change of status for the course #{result[:code]}: #{result[:decision_text]}")
+    UCAS::Notifier.notify(result)
     
     begin
       UCAS::Datastore.set(result[:code], result[:decision])
     rescue Exception => e
       UCAS::Application.error("There was an error in Redis: #{e.message}")
-    ensure
-      #UCAS::Notifier.notify(result)
+      raise
     end
       
   else
