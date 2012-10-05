@@ -34,6 +34,7 @@ module UCAS
       begin
         login
         go_to_choices
+        return parse
       rescue UCAS::ScraperException => e
         UCAS::Application.error(e.message)
         raise
@@ -61,5 +62,25 @@ module UCAS
       def go_to_choices
         @agent.page.link_with(text: "choices ").click
       end
+      
+      def parse
+        choice_rows = @agent.page.search('td.trackinfo')
+        course_codes = @agent.page.search('a.track')
+        results = []
+        i = 0
+        course_codes.each do |field|
+          result = {
+            code: field.text.strip!,
+            university: choice_rows.shift.text.strip!,
+            starting: choice_rows.shift.text.strip!,
+            decision: choice_rows.shift.text.strip!,
+            reply: choice_rows.shift.text.strip!,
+            updated: choice_rows.shift.text.strip!
+          }
+          results << result
+        end
+        results
+      end
+      
   end
 end
