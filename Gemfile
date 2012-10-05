@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'mechanize'
 gem 'nokogiri'
-gem 'sendgrid'
+gem 'mail'
 gem 'redis'
 gem 'twilio-ruby'
+gem 'actionmailer'

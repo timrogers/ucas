@@ -1,4 +1,5 @@
 require 'twilio-ruby'
+require 'mail'
 require_relative '../settings'
 
 module UCAS
@@ -19,6 +20,17 @@ module UCAS
         raise
       end
       
+      # And now send an email...
+      begin
+        Mail.deliver do
+          from    "ucas@ec2.timrog.net"
+          to      EMAIL_ADDRESS
+          subject "UCAS application change"
+          body    "Status change in application to #{result[:university]} for #{result[:code]}: #{result[:decision_text]}"
+        end
+      rescue Exception => e
+        UCAS::Application.error("Couldn't send email notification: #{e.message}")
+      end
     end
   end
 end
