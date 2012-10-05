@@ -9,7 +9,7 @@ require File.join(File.dirname(__FILE__), 'notifier')
 
 module UCAS
   class Application
-    @logger = Logger.new('log/application.log', 'daily')
+    @logger = Logger.new(File.join(File.dirname(__FILE__), '..', 'log', 'application.log'), 'daily')
     @logger.level = Logger::INFO
     @logger.datetime_format = "%Y-%m-%d %H:%M:%S"
     
