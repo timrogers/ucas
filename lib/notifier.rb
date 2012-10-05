@@ -22,11 +22,14 @@ module UCAS
       
       # And now send an email...
       begin
+        email = "There has been a status change in the UCAS application to #{result[:university]} for the course #{result[:code]}.
+        
+        The new status of that application is '#{result[:decision_text]}"
         Mail.deliver do
-          from    "ucas@ec2.timrog.net"
+          from    FROM_EMAIL_ADDRESS
           to      EMAIL_ADDRESS
           subject "UCAS application change"
-          body    "Status change in application to #{result[:university]} for #{result[:code]}: #{result[:decision_text]}"
+          body    email
         end
       rescue Exception => e
         UCAS::Application.error("Couldn't send email notification: #{e.message}")
