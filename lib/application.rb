@@ -1,7 +1,10 @@
 require 'rubygems'
 require 'logger'
+require 'redis'
 require_relative 'scraper'
 require_relative 'exceptions'
+require_relative 'datastore'
+
 
 module UCAS
   class Application
