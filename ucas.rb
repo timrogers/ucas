@@ -1,5 +1,5 @@
-require('./lib/application')
-require('./settings')
+require File.join(File.dirname(__FILE__), 'lib', 'application')
+require File.join(File.dirname(__FILE__), 'settings')
 
 scraper = UCAS::Scraper.new(UCAS_PERSONAL_ID, UCAS_USERNAME, UCAS_PASSWORD)
 results = scraper.scrape

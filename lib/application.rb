@@ -1,10 +1,10 @@
 require 'rubygems'
 require 'logger'
 require 'redis'
-require_relative 'scraper'
-require_relative 'exceptions'
-require_relative 'datastore'
-require_relative 'notifier'
+require File.join(File.dirname(__FILE__), 'scraper')
+require File.join(File.dirname(__FILE__), 'exceptions')
+require File.join(File.dirname(__FILE__), 'datastore')
+require File.join(File.dirname(__FILE__), 'notifier')
 
 
 module UCAS
