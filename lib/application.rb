@@ -1,14 +1,14 @@
 require 'rubygems'
 require 'logger'
-require 'redis'
-require File.join(File.dirname(__FILE__), 'scraper')
-require File.join(File.dirname(__FILE__), 'exceptions')
-require File.join(File.dirname(__FILE__), 'datastore')
-require File.join(File.dirname(__FILE__), 'notifier')
-
 
 module UCAS
   class Application
+    @@version = "1.0"
+    
+    def self.version
+      @@version
+    end
+    
     @logger = Logger.new(File.join(File.dirname(__FILE__), '..', 'log', 'application.log'), 'daily')
     @logger.level = Logger::INFO
     @logger.datetime_format = "%Y-%m-%d %H:%M:%S"

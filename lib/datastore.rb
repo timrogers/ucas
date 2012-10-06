@@ -1,3 +1,5 @@
+require 'redis'
+
 module UCAS
   class Datastore
     @@redis = Redis.new

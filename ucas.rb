@@ -1,4 +1,7 @@
-require File.join(File.dirname(__FILE__), 'lib', 'application')
+# Require all the parts of the application from lib/
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
+
+# Bring in the settings constants from settings.rb
 require File.join(File.dirname(__FILE__), 'settings')
 
 scraper = UCAS::Scraper.new(UCAS_PERSONAL_ID, UCAS_USERNAME, UCAS_PASSWORD)
