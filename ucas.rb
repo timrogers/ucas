@@ -20,7 +20,7 @@ results.each do |result|
     # The decision for that university has changed - hooray!
     
     entry[:decision] = result[:decision] # Get ready to save the new application status
-    UCAS::Application.log("Change of status for the course #{entry[:course]} at #{entry[:university]}: '#{result[:decision]}'")
+    UCAS::Application.log("Change of status for the course #{entry[:course]} at #{entry[:university]}: '#{entry[:decision]}' (#{entry[:code]})")
     UCAS::Notifier.notify(entry)
     
     begin
@@ -32,6 +32,6 @@ results.each do |result|
       
   else
     # Nothing has changed since last time
-    UCAS::Application.log("There has been no change of status for the course #{entry[:code]}.")
+    UCAS::Application.log("There has been no change of status for the course '#{entry[:course]}' (#{entry[:code]}).")
   end
 end
