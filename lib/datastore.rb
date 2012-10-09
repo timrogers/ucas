@@ -1,5 +1,6 @@
 require 'redis'
 require 'redis-namespace'
+require 'json'
 
 module UCAS
   class Datastore
@@ -10,12 +11,12 @@ module UCAS
       @@adapter
     end
     
-    def self.get(key)
-      @@adapter.get(key)
+    def self.load(key)
+      JSON.parse(@@adapter.get(key))
     end
     
     def self.set(key, value)
-      @@adapter.set(key, value)
+      @@adapter.set(key, value.to_json)
     end
   end
 end

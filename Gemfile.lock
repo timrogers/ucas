@@ -46,6 +46,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  json
   mail
   mechanize
   nokogiri
