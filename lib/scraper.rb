@@ -111,6 +111,7 @@ module UCAS
             code: field.text.strip!,
             university: choice_rows.shift.text.strip!,
             starting: choice_rows.shift.text.strip!,
+            decision: choice_rows.shift.text.strip!
           }
           
           result[:course] = get_course_name(result[:code], result[:university]) if lookup_course
