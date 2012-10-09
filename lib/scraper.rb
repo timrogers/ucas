@@ -41,6 +41,17 @@ module UCAS
       end
     end
     
+    def fetch_metadata
+      begin
+        login
+        go_to_choices
+        return parse_course_data
+      rescue UCAS::ScraperException => e
+        UCAS::Application.error(e.message)
+        raise
+      end
+    end
+    
     private
       def login
         # Go to the UCAS track site
@@ -63,7 +74,34 @@ module UCAS
         @agent.page.link_with(text: "choices ").click
       end
       
+      def get_course_name(code, institution)
+          document = Nokogiri::HTML(open("http://www.meanboyfriend.com/readtolearn/ucas_code_search/?course_code=#{code}&catalogue_year=2013"))
+          document.css("institution[name='#{institution}'] course name").text()
+      end
+      
       def parse
+        choice_rows = @agent.page.search('td.trackinfo')
+        course_codes = @agent.page.search('a.track')
+        results = []
+
+        course_codes.each do |field|
+          result = {
+            code: field.text.strip,
+            decision: choice_rows[2].text.strip,
+          }
+          
+          if result[:decision] == nil || result[:decision] == ""
+            result[:decision_text] = "<no decision>"
+          else
+            result[:decision_text] = result[:decision]
+          end
+          
+          results << result
+        end
+        results
+      end
+      
+      def parse_course_data
         choice_rows = @agent.page.search('td.trackinfo')
         course_codes = @agent.page.search('a.track')
         results = []
@@ -73,17 +111,9 @@ module UCAS
             code: field.text.strip!,
             university: choice_rows.shift.text.strip!,
             starting: choice_rows.shift.text.strip!,
-            decision: choice_rows.shift.text.strip!,
-            reply: choice_rows.shift.text.strip!,
-            updated: choice_rows.shift.text.strip!
           }
           
-          if result[:decision] == nil || result[:decision] == ""
-            result[:decision_text] = "<no decision>"
-          else
-            result[:decision_text] = result[:decision]
-          end
-          
+          result[:course] = get_course_name(result[:code], result[:university]) if lookup_course
           results << result
         end
         results
