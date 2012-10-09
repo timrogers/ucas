@@ -11,8 +11,8 @@ module UCAS
       @@adapter
     end
     
-    def self.load(key)
-      JSON.parse(@@adapter.get(key))
+    def self.get(key)
+      JSON.parse(@@adapter.get(key), symbolize_names: true)
     end
     
     def self.set(key, value)

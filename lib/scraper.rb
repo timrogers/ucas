@@ -86,15 +86,9 @@ module UCAS
 
         course_codes.each do |field|
           result = {}
-            result[:code] = field.text.strip,
-            result[:decision] = choice_rows[2].text
+            result[:code] = field.text.strip
+            result[:decision] = choice_rows[2].text.strip!
             5.times { choice_rows.shift }
-          
-          if result[:decision] == nil || result[:decision] == ""
-            result[:decision_text] = "<no decision>"
-          else
-            result[:decision_text] = result[:decision]
-          end
           
           results << result
         end
