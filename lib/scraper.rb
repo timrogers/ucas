@@ -114,7 +114,7 @@ module UCAS
             decision: choice_rows.shift.text.strip!
           }
           
-          result[:course] = get_course_name(result[:code], result[:university]) if lookup_course
+          result[:course] = get_course_name(result[:code], result[:university])
           results << result
         end
         results
