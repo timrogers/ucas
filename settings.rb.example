@@ -1,0 +1,11 @@
+UCAS_PERSONAL_ID = "<x>"
+UCAS_USERNAME = "<x>"
+UCAS_PASSWORD = "<x>" # Don't worry, only you can see this
+
+TWILIO_SID = "<x>"
+TWILIO_TOKEN = "<x>"
+TWILIO_FROM = "<x>" # A number you have bought on Twilio to send messages from
+
+PHONE_NUMBER = "<x>" # The mobile number to send notifications to
+EMAIL_ADDRESS = "<x>" # The email address to notify
+FROM_EMAIL_ADDRESS = "<x>" # An address to show emails as being from
