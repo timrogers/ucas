@@ -32,6 +32,6 @@ results.each do |result|
       
   else
     # Nothing has changed since last time
-    UCAS::Application.log("There has been no change of status for the course '#{entry[:course]}' (#{entry[:code]}).")
+    UCAS::Application.log("There has been no change of status for the course '#{entry[:course]}' (#{entry[:code]}) at #{entry[:university]}.")
   end
 end
