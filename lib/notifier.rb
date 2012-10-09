@@ -10,11 +10,11 @@ module UCAS
       # Send an SMS with the application change
       begin
         @@twilio = Twilio::REST::Client.new TWILIO_SID, TWILIO_TOKEN
-        #@@twilio.account.sms.messages.create(
-        #  from: TWILIO_FROM,
-        #  to: PHONE_NUMBER,
-        #  body: "Status change in application to #{result[:university]} for #{result[:course]}: #{friendly_decision(result[:decision])}"
-        #)
+        @@twilio.account.sms.messages.create(
+          from: TWILIO_FROM,
+          to: PHONE_NUMBER,
+          body: "Status change in application to #{result[:university]} for #{result[:course]}: #{friendly_decision(result[:decision])}"
+        )
       rescue Exception => e
         UCAS::Application.error("Couldn't send Twilio SMS: #{e.message}")
         raise
