@@ -1,3 +1,4 @@
+require File.dirname(__FILE__) + '/application.rb'
 require 'redis'
 require 'redis-namespace'
 require 'json'
