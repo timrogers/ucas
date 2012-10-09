@@ -85,10 +85,10 @@ module UCAS
         results = []
 
         course_codes.each do |field|
-          result = {
-            code: field.text.strip,
-            decision: choice_rows[2].text.strip,
-          }
+          result = {}
+            result[:code] = field.text.strip,
+            result[:decision] = choice_rows[2].text
+            5.times { choice_rows.shift }
           
           if result[:decision] == nil || result[:decision] == ""
             result[:decision_text] = "<no decision>"
@@ -107,12 +107,12 @@ module UCAS
         results = []
         i = 0
         course_codes.each do |field|
-          result = {
-            code: field.text.strip!,
-            university: choice_rows.shift.text.strip!,
-            starting: choice_rows.shift.text.strip!,
-            decision: choice_rows.shift.text.strip!
-          }
+            result = {}
+            result[:code] = field.text.strip!
+            result[:university] = choice_rows.shift.text.strip!
+            result[:starting] = choice_rows.shift.text.strip!
+            result[:decision] = choice_rows.shift.text.strip!
+          2.times { choice_rows.shift }
           
           result[:course] = get_course_name(result[:code], result[:university])
           results << result
