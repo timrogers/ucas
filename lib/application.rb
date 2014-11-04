@@ -3,7 +3,7 @@ require 'logger'
 
 module UCAS
   class Application
-    @@version = "2.0"
+    @@version = "2.1"
     
     def self.version
       @@version
