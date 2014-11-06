@@ -1,5 +1,4 @@
 UCAS_PERSONAL_ID = "<x>"
-UCAS_USERNAME = "<x>"
 UCAS_PASSWORD = "<x>" # Don't worry, only you can see this
 
 TWILIO_SID = "<x>"
