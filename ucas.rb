@@ -24,7 +24,7 @@ results.each do |result|
     UCAS::Notifier.notify(entry)
     
     begin
-      UCAS::Datastore.set(entry[:courseCode], entry)
+      UCAS::Datastore.set(entry[:universityCode] + "-" + entry[:courseCode], entry)
     rescue Exception => e
       UCAS::Application.error("There was an error in Redis: #{e.message}")
       raise
