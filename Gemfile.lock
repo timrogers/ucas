@@ -2,9 +2,11 @@ GEM
   remote: http://rubygems.org/
   specs:
     builder (3.0.3)
+    concurrent-ruby (1.1.10)
     domain_name (0.5.4)
       unf (~> 0.0.3)
-    i18n (0.6.1)
+    i18n (1.10.0)
+      concurrent-ruby (~> 1.0)
     json (1.7.5)
     jwt (0.1.4)
       json (>= 1.2.4)
